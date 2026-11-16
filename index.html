@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAHIORA — HELLO</title>
+    <!-- Tailwind CSS pour un design propre -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background-color: #9eb2a8;
+        color: #f5f2ec;
+      }
+      .custom-card {
+        background-color: rgba(245, 242, 236, 0.1);
+        border: 1px solid rgba(245, 242, 236, 0.2);
+      }
+      .custom-input {
+        background-color: rgba(245, 242, 236, 0.15);
+        color: #f5f2ec;
+        border: 1px solid rgba(245, 242, 236, 0.3);
+      }
+      .custom-input::placeholder {
+        color: rgba(245, 242, 236, 0.6);
+      }
+      .custom-tab-active {
+        background-color: #f5f2ec;
+        color: #9eb2a8;
+        font-weight: 600;
+      }
+    </style>
+</head>
+<body class="min-h-screen pb-28 font-sans">
+
+    <!-- En-tête -->
+    <header class="p-5 border-b border-[#f5f2ec]/20 flex justify-between items-center">
+        <h1 class="text-xl font-light tracking-widest text-[#f5f2ec]">AAHIORA</h1>
+        <span class="text-xs uppercase tracking-wider bg-[#f5f2ec]/20 px-3 py-1 rounded-full text-[#f5f2ec]">Intintentional Life</span>
+    </header>
+
+    <!-- Zone principale dynamique -->
+    <main id="app-content" class="p-5">
+        <!-- Contenu par défaut : My Life (Quotidien) -->
+        <div class="space-y-5">
+            <div>
+                <h2 class="text-2xl font-light">My Life</h2>
+                <p class="text-xs text-[#f5f2ec]/80">Planification quotidienne & organisation</p>
+            </div>
+            <div class="custom-card p-5 rounded-3xl shadow-sm space-y-3">
+                <p class="text-sm font-medium tracking-wide">📋 Tâches du jour :</p>
+                <input type="text" placeholder="Ajouter une priorité..." class="w-full p-3 rounded-2xl text-sm custom-input focus:outline-none">
+            </div>
+        </div>
+    </main>
+
+    <!-- Barre de navigation fixe en bas (5 onglets) -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-[#9eb2a8] border-t border-[#f5f2ec]/20 p-2 flex justify-around items-center shadow-lg backdrop-blur-md">
+        <button onclick="switchTab('life')" id="btn-life" class="flex flex-col items-center p-2 rounded-2xl text-[10px] tracking-tight custom-tab-active transition-all">
+            <span class="text-base mb-1">📅</span> <span>Life</span>
+        </button>
+        <button onclick="switchTab('walk')" id="btn-walk" class="flex flex-col items-center p-2 rounded-2xl text-[10px] tracking-tight text-[#f5f2ec] transition-all">
+            <span class="text-base mb-1">✝️</span> <span>Walk</span>
+        </button>
+        <button onclick="switchTab('hello')" id="btn-hello" class="flex flex-col items-center p-2 rounded-2xl text-[10px] tracking-tight text-[#f5f2ec] transition-all">
+            <span class="text-base mb-1">✨</span> <span>HELLO</span>
+        </button>
+        <button onclick="switchTab('stewardship')" id="btn-stewardship" class="flex flex-col items-center p-2 rounded-2xl text-[10px] tracking-tight text-[#f5f2ec] transition-all">
+            <span class="text-base mb-1">💰</span> <span>Stewardship</span>
+        </button>
+        <button onclick="switchTab('memories')" id="btn-memories" class="flex flex-col items-center p-2 rounded-2xl text-[10px] tracking-tight text-[#f5f2ec] transition-all">
+            <span class="text-base mb-1">🖼️</span> <span>Memories</span>
+        </button>
+    </nav>
+
+    <script>
+        function switchTab(tab) {
+            // Liste de tous les onglets
+            const tabs = ['life', 'walk', 'hello', 'stewardship', 'memories'];
+            
+            // Réinitialiser les boutons
+            tabs.forEach(t => {
+                document.getElementById('btn-' + t).className = "flex flex-col items-center p-2 rounded-2xl text-[10px] tracking-tight text-[#f5f2ec] transition-all";
+            });
+            
+            // Activer le bouton cliqué
+            document.getElementById('btn-' + tab).className = "flex flex-col items-center p-2 rounded-2xl text-[10px] tracking-tight custom-tab-active transition-all";
+
+            // Changer le contenu selon l'onglet
+            const content = document.getElementById('app-content');
+            
+            if(tab === 'life') {
+                content.innerHTML = `
+                    <div class="space-y-5">
+                        <div>
+                            <h2 class="text-2xl font-light">My Life</h2>
+                            <p class="text-xs text-[#f5f2ec]/80">Planification quotidienne & organisation</p>
+                        </div>
+                        <div class="custom-card p-5 rounded-3xl shadow-sm space-y-3">
+                            <p class="text-sm font-medium tracking-wide">📋 Tâches du jour :</p>
+                            <input type="text" placeholder="Ajouter une priorité..." class="w-full p-3 rounded-2xl text-sm custom-input focus:outline-none">
+                        </div>
+                    </div>`;
+            } else if(tab === 'walk') {
+                content.innerHTML = `
+                    <div class="space-y-5">
+                        <div>
+                            <h2 class="text-2xl font-light">My Walk</h2>
+                            <p class="text-xs text-[#f5f2ec]/80">Journal spirituel & prières</p>
+                        </div>
+                        <div class="custom-card p-5 rounded-3xl shadow-sm space-y-3">
+                            <p class="text-sm font-italic">« Car je connais les projets que j'ai formés sur vous, dit l'Éternel... » — Jérémie 29:11</p>
+                            <input type="text" placeholder="Noter un enseignement ou une prière..." class="w-full p-3 rounded-2xl text-sm custom-input focus:outline-none">
+                        </div>
+                    </div>`;
+            } else if(tab === 'hello') {
+                content.innerHTML = `
+                    <div class="space-y-5">
+                        <div>
+                            <h2 class="text-2xl font-light">HELLO</h2>
+                            <p class="text-xs text-[#f5f2ec]/80">Espace souvenirs & moodboard (Façon Cove)</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="custom-card p-4 rounded-3xl h-40 flex flex-col justify-between">
+                                <span class="text-xs text-[#f5f2ec]/70">Pensée du jour</span>
+                                <p class="text-sm italic">« Focus on getting a little better everyday. »</p>
+                            </div>
+                            <div class="custom-card p-4 rounded-3xl h-40 flex flex-col justify-between bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');">
+                                <span class="text-xs text-white">Souvenir</span>
+                                <span class="text-xs font-medium text-white">Inspiration</span>
+                            </div>
+                        </div>
+                    </div>`;
+            } else if(tab === 'stewardship') {
+                content.innerHTML = `
+                    <div class="space-y-5">
+                        <div>
+                            <h2 class="text-2xl font-light">My Stewardship</h2>
+                            <p class="text-xs text-[#f5f2ec]/80">Gestion financière & épargne</p>
+                        </div>
+                        <div class="custom-card p-5 rounded-3xl shadow-sm space-y-3">
+                            <p class="text-sm font-medium">Solde actuel du mois : 0,00 €</p>
+                            <input type="text" placeholder="Ajouter une dépense..." class="w-full p-3 rounded-2xl text-sm custom-input focus:outline-none">
+                        </div>
+                    </div>`;
+            } else if(tab === 'memories') {
+                content.innerHTML = `
+                    <div class="space-y-5">
+                        <div>
+                            <h2 class="text-2xl font-light">My Memories</h2>
+                            <p class="text-xs text-[#f5f2ec]/80">Journal intime & jalons de vie</p>
+                        </div>
+                        <div class="custom-card p-5 rounded-3xl shadow-sm space-y-3">
+                            <p class="text-sm font-medium">✨ Témoignages & étapes importantes</p>
+                            <input type="text" placeholder="Écrire un moment marquant..." class="w-full p-3 rounded-2xl text-sm custom-input focus:outline-none">
+                        </div>
+                    </div>`;
+            }
+        }
+    </script>
+</body>
+</html>

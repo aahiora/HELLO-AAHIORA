@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HELLO - by AAHIORA</title>
+    <!-- Tailwind CSS pour un design propre -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background-color: #f5f2ec;
+        color: #594435;
+      }
+      .custom-card {
+        background-color: #ffffff;
+        border: 1px solid #9eb2a8;
+      }
+      .custom-btn {
+        background-color: #594435;
+        color: #f5f2ec;
+      }
+      .custom-tab-active {
+        background-color: #9eb2a8;
+        color: #594435;
+      }
+    </style>
+</head>
+<body class="min-h-screen pb-24 font-sans">
+
+    <!-- En-tête -->
+    <header class="p-4 border-b border-[#9eb2a8] flex justify-between items-center">
+        <h1 class="text-xl font-bold tracking-widest text-[#594435]">HELLO <span class="text-xs font-normal">by AAHIORA</span></h1>
+    </header>
+
+    <!-- Zone principale qui change selon l'onglet cliqué -->
+    <main id="app-content" class="p-4">
+        <!-- Contenu par défaut (Quotidien) -->
+        <div class="space-y-4">
+            <h2 class="text-lg font-semibold">Mon Quotidien</h2>
+            <div class="custom-card p-4 rounded-2xl shadow-sm">
+                <p class="text-sm font-medium">📋 To-do du jour :</p>
+                <input type="text" placeholder="Ajouter une tâche..." class="w-full mt-2 p-2 border border-[#9eb2a8] rounded-xl bg-[#f5f2ec] text-sm focus:outline-none">
+            </div>
+        </div>
+    </main>
+
+    <!-- Barre de navigation en bas -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-[#f5f2ec] border-t border-[#9eb2a8] p-3 flex justify-around items-center shadow-lg">
+        <button onclick="switchTab('quotidien')" id="btn-quotidien" class="flex flex-col items-center p-2 rounded-xl text-xs font-medium custom-tab-active">
+            📅 <span>Quotidien</span>
+        </button>
+        <button onclick="switchTab('cove')" id="btn-cove" class="flex flex-col items-center p-2 rounded-xl text-xs font-medium text-[#594435]">
+            🖼️ <span>Souvenirs</span>
+        </button>
+        <button onclick="switchTab('finances')" id="btn-finances" class="flex flex-col items-center p-2 rounded-xl text-xs font-medium text-[#594435]">
+            💰 <span>Finances</span>
+        </button>
+        <button onclick="switchTab('foi')" id="btn-foi" class="flex flex-col items-center p-2 rounded-xl text-xs font-medium text-[#594435]">
+            ✝️ <span>Foi & Bible</span>
+        </button>
+    </nav>
+
+    <script>
+        function switchTab(tab) {
+            // Enlever la classe active de tous les boutons
+            ['quotidien', 'cove', 'finances', 'foi'].forEach(t => {
+                document.getElementById('btn-' + t).className = "flex flex-col items-center p-2 rounded-xl text-xs font-medium text-[#594435]";
+            });
+            // Activer le bouton cliqué
+            document.getElementById('btn-' + tab).className = "flex flex-col items-center p-2 rounded-xl text-xs font-medium custom-tab-active";
+
+            // Changer le contenu selon l'onglet
+            const content = document.getElementById('app-content');
+            if(tab === 'quotidien') {
+                content.innerHTML = `<div class="space-y-4"><h2 class="text-lg font-semibold">Mon Quotidien</h2><div class="custom-card p-4 rounded-2xl shadow-sm"><p class="text-sm font-medium">📋 To-do du jour :</p><input type="text" placeholder="Ajouter une tâche..." class="w-full mt-2 p-2 border border-[#9eb2a8] rounded-xl bg-[#f5f2ec] text-sm focus:outline-none"></div></div>`;
+            } else if(tab === 'cove') {
+                content.innerHTML = `<div class="space-y-4"><h2 class="text-lg font-semibold">Souvenirs (Façon Cove)</h2><div class="custom-card p-4 rounded-2xl shadow-sm text-center py-10"><p class="text-sm text-[#594435]">Ici, tes photos et tes notes en grille esthétique ✨</p></div></div>`;
+            } else if(tab === 'finances') {
+                content.innerHTML = `<div class="space-y-4"><h2 class="text-lg font-semibold">Suivi Financier</h2><div class="custom-card p-4 rounded-2xl shadow-sm"><p class="text-sm font-medium">Solde actuel : 0,00 €</p></div></div>`;
+            } else if(tab === 'foi') {
+                content.innerHTML = `<div class="space-y-4"><h2 class="text-lg font-semibold">Foi & Bible</h2><div class="custom-card p-4 rounded-2xl shadow-sm"><p class="text-sm font-italic">« Car je connais les projets que j'ai formés sur vous... » — Jérémie 29:11</p></div></div>`;
+            }
+        }
+    </script>
+</body>
+</html>
